@@ -1,0 +1,80 @@
+/* hero styles */
+
+.hero {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero h2 {
+  font-family: var(--merri);
+}
+
+/* example todos styles */
+
+.example-todos {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 1rem 1rem 10rem 1rem;
+}
+
+.example-todos h2 {
+  font-family: var(--merri);
+  margin-bottom: 10px;
+}
+
+.todo {
+  margin-top: 10px;
+  border: 2px solid var(--lg);
+  padding: 1rem;
+}
+
+.todo-title {
+  font-family: var(--merri);
+  font-size: 1.3rem;
+}
+
+.todo-description {
+  font-family: var(--sans);
+  font-size: 1rem;
+}
+
+.todo-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-checkbox {
+  margin-left: 10px;
+}
+
+.todo-actions {
+  gap: 1rem;
+}
+
+.todo-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--dg);
+  color: var(--white);
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.todo-actions button:hover {
+  background-color: var(--lg);
+  color: var(--dg);
+}
+
+/* media queries */
+
+@media (min-width: 850px) {
+  .example-todos {
+    max-width: 1200px;
+  }
+}

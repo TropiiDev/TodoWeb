@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/css/index.css">
+  <title>Todos</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html"><h1>Todo</h1></a></li>
+      <li class="signin"><a href="pages/signin.html">Sign In</a></li>
+      <a class="menu-toggle" id="main-menu-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
+    </ul>
+    <div id="menu-links">
+      <ul>
+        <li class="menu-link"><a href="pages/signin.html">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h2>Welcome to your todo list!</h2>
+    <p>Keep track of your tasks and get things done.</p>
+  </section>
+
+  <section class="example-todos">
+    <h2>Example Todos</h2>
+    <p>Here is what a todo looks like!</p>
+    <div class="todo">
+      <h2 class="todo-title">Example Todo</h2>
+      <p class="todo-description">This is an example todo. You can add a description here to give more context to the task.</p>
+      <div class="todo-content">
+        <ul id="todo-list">
+          
+          <li id="todo-item">Example task 1</li>
+          <li id="todo-item">Example task 2</li>
+          <li id="todo-item">Example task 3</li>
+        </ul>
+      </div>
+      <div class="todo-actions">
+        <button id="todo-action" onclick="edit()" class="todo-action">Edit</button>
+        <button id="todo-action" onclick="deleteTodo()" class="todo-action">Delete</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://kit.fontawesome.com/a478227047.js" crossorigin="anonymous"></script>
+  <script src="/assets/js/global.js"></script>
+  <script src="/assets/js/index.js"></script>
+</body>
+</html>
