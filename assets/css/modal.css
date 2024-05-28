@@ -1,0 +1,72 @@
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black background */
+}
+
+/* Modal Header */
+.modal-header h2 {
+  font-family: var(--merri);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: var(--dg);
+  margin: 15% auto; /* Center the modal vertically */
+  padding: 20px;
+  border: 2px solid var(--grey);
+  width: 80%;
+  color: var(--white);
+}
+
+.modal-content .user-input {
+  width: 100%;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-footer button {
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: var(--merri);
+  padding: 1rem;
+  border: 1px solid var(--lg);
+  border-radius: 5px;
+  background-color: var(--dg);
+  color: var(--white);
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.submit-button {
+  transition: 0.5s;
+}
+
+.submit-button:hover {
+  background-color: var(--lg);
+  color: var(--dg);
+}

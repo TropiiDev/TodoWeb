@@ -82,7 +82,39 @@ nav ul a {
   max-width: 850px;
   margin: 0 auto;
   padding: 1rem;
-  
+}
+
+/* user input styles */
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.user-input {
+  background-color: rgba(0,0,0,0);
+  border: 2px solid var(--grey);
+  width: 300px;
+  border-radius: 100px;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 18px;
+  text-indent: 18px;
+  color: var(--white);
+}
+
+.user-input:focus {
+  outline: none;
+}
+
+.user-input-label {
+  color: var(--white);
+  background-color: var(--dg);
+  font-size: 11px;
+  position: absolute;
+  left: 20px;
+  top: -7px;
+  padding: 2px;
 }
 
 /* media queries */

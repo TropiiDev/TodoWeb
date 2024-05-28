@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/assets/css/index.css">
+  <link rel="stylesheet" href="/assets/css/modal.css">
   <title>Todos</title>
 </head>
 <body>
@@ -37,10 +38,9 @@
       <p class="todo-description">This is an example todo. You can add a description here to give more context to the task.</p>
       <div class="todo-content">
         <ul id="todo-list">
-          
-          <li id="todo-item">Example task 1</li>
-          <li id="todo-item">Example task 2</li>
-          <li id="todo-item">Example task 3</li>
+          <li class="0" id="todo-item">Example task 1</li>
+          <li class="1" id="todo-item">Example task 2</li>
+          <li class="2" id="todo-item">Example task 3</li>
         </ul>
       </div>
       <div class="todo-actions">
@@ -50,8 +50,49 @@
     </div>
   </section>
 
+  <div id="editModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <span class="close">×</span>
+          <h2>Change the name</h2>
+      </div>
+      <div class="modal-body">
+          <p>Please enter the new name</p>
+          <div class="input-group">
+            <label class="user-input-label" for="name">Name</label>
+            <input class="user-input" type="text" id="nameChange" required>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-button" type="button" id="changeName">Change Name</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="addModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <span class="close">×</span>
+          <h2>Add a new todo</h2>
+      </div>
+      <div class="modal-body">
+          <p>Please enter the name</p>
+          <div class="input-group">
+            <label class="user-input-label" for="name">Name</label>
+            <input class="user-input" type="text" placeholder="New Todo" id="newName" required>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-button" type="button" id="addTodo">Add Todo</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://kit.fontawesome.com/a478227047.js" crossorigin="anonymous"></script>
   <script src="/assets/js/global.js"></script>
   <script src="/assets/js/index.js"></script>
+  <script src="/assets/js/components/modal.js"></script>
 </body>
 </html>

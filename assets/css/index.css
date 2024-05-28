@@ -56,6 +56,10 @@
   gap: 1rem;
 }
 
+.add {
+  margin-right: 5px;
+}
+
 .todo-actions button {
   padding: 0.5rem 1rem;
   border: none;
