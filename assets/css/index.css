@@ -17,7 +17,7 @@
 .example-todos {
   max-width: 850px;
   margin: 0 auto;
-  padding: 1rem 1rem 10rem 1rem;
+  padding: 1rem;
 }
 
 .example-todos h2 {
@@ -27,6 +27,7 @@
 
 .todo {
   margin-top: 10px;
+  margin-bottom: 0;
   border: 2px solid var(--lg);
   padding: 1rem;
 }
@@ -45,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .todo-checkbox {
@@ -75,10 +76,69 @@
   color: var(--dg);
 }
 
+/* explanation styles */
+.explanation {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.explanation h2 {
+  font-family: var(--merri);
+}
+
+.explanation p {
+  font-family: var(--sans);
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.subtitle-bb {
+  width: 100%;
+  border-bottom: 2px solid var(--lg);
+}
+
+.explanation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* footer styles */
+
+.footer {
+  margin-top: 25px;
+  background-color: var(--lg);
+  color: var(--dg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.footer a {
+  color: var(--dg);
+  text-decoration: underline;
+  display: block;
+  padding: 10px 15px;
+  transition: 0.5s;
+}
+
+.footer a:hover {
+  color: var(--grey);
+  background-color: var(--black);
+  border-radius: 10px;
+}
+
 /* media queries */
 
 @media (min-width: 850px) {
   .example-todos {
+    max-width: 1200px;
+  }
+
+  .explanation {
     max-width: 1200px;
   }
 }
