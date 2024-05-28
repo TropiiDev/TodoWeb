@@ -72,6 +72,8 @@ const edit = () => {
       const todoAction = todoActions[i];
       todoAction.style.display = 'inline-block';
     }
+
+    return;
   })
 
   // when the checkbox is clicked, remove the item and the checkbox
@@ -138,6 +140,7 @@ const edit = () => {
 
         // change the name and add the checkbox
         todoListItem[todoListNum].innerHTML = nameChangeInput.value;
+        nameChangeInput.value = "";
         todoListItem[todoListNum].appendChild(checkbox);
 
         // close the modal
@@ -154,7 +157,7 @@ const edit = () => {
 
   // if the addTodo button was clicked, add a new todoItem to todoList
   addTodo.addEventListener('click', () => {
-    const newNameInput = document.querySelector("#newName").value;
+    let newNameInput = document.querySelector("#newName");
     const todoListItem = document.querySelectorAll('#todo-item');
     const lastTodoItem = todoListItem[todoListItem.length - 1];
 
@@ -165,13 +168,12 @@ const edit = () => {
         return;
       } else {
         // if it gives us a number, create the new todoItem
-        console.log(i);
         const todoNum = lastTodoItem.classList[i];
         const newTodoItem = document.createElement('li');
         
         newTodoItem.className = Number(todoNum) + 1;
         newTodoItem.id = 'todo-item';
-        newTodoItem.innerHTML = newNameInput;
+        newTodoItem.innerHTML = newNameInput.value;
 
         // create the new checkbox
         const checkbox = document.createElement('input');
@@ -181,12 +183,12 @@ const edit = () => {
         checkbox.id = i;
 
         // append the checkbox and the newTodoItem
+        newNameInput.value = "";
         newTodoItem.appendChild(checkbox);
-        console.log(newTodoItem);
         todoList.appendChild(newTodoItem);
 
         // close the modal
-        newNameInput.value = '';
+        console.log(newNameInput.value);
         addModal.style.display = 'none';
 
         // if the checkbox is clicked remove the new item and the checkbox
