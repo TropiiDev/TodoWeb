@@ -1,6 +1,6 @@
 const edit = () => {
   const todoList = document.querySelector("#todo-list");
-  let todoListItem = document.querySelectorAll('#todo-item');
+  const todoListItem = document.querySelectorAll('#todo-item');
   const todoActionsDiv = document.querySelector('.todo-actions');
   const todoActions = document.querySelectorAll('#todo-action');
 
@@ -127,7 +127,7 @@ const edit = () => {
       } else {
         // if it isn't then we have the number of the todoListItem
         const todoListNum = editModal.classList[i];
-        let nameChangeInput = document.querySelector("#nameChange").value;
+        let nameChangeInput = document.querySelector("#nameChange");
 
         // create another checkbox for that item
         const checkbox = document.createElement('input');
@@ -137,7 +137,7 @@ const edit = () => {
         checkbox.id = i;
 
         // change the name and add the checkbox
-        todoListItem[todoListNum].innerHTML = nameChangeInput;
+        todoListItem[todoListNum].innerHTML = nameChangeInput.value;
         todoListItem[todoListNum].appendChild(checkbox);
 
         // close the modal
@@ -154,7 +154,8 @@ const edit = () => {
 
   // if the addTodo button was clicked, add a new todoItem to todoList
   addTodo.addEventListener('click', () => {
-    let newNameInput = document.querySelector("#newName").value;
+    const newNameInput = document.querySelector("#newName").value;
+    const todoListItem = document.querySelectorAll('#todo-item');
     const lastTodoItem = todoListItem[todoListItem.length - 1];
 
     // lastTodoItem returns an array so we have to loop through it
@@ -167,6 +168,7 @@ const edit = () => {
         console.log(i);
         const todoNum = lastTodoItem.classList[i];
         const newTodoItem = document.createElement('li');
+        
         newTodoItem.className = Number(todoNum) + 1;
         newTodoItem.id = 'todo-item';
         newTodoItem.innerHTML = newNameInput;
@@ -184,6 +186,7 @@ const edit = () => {
         todoList.appendChild(newTodoItem);
 
         // close the modal
+        newNameInput.value = '';
         addModal.style.display = 'none';
 
         // if the checkbox is clicked remove the new item and the checkbox
@@ -194,5 +197,4 @@ const edit = () => {
       }
     }
   })
-  todoListItem = document.querySelectorAll('#todo-item');
 }
