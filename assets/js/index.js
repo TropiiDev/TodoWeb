@@ -128,6 +128,7 @@ const edit = () => {
         return;
       } else {
         // if it isn't then we have the number of the todoListItem
+        const todoListItem = document.querySelectorAll('#todo-item');
         const todoListNum = editModal.classList[i];
         let nameChangeInput = document.querySelector("#nameChange");
 
@@ -137,6 +138,15 @@ const edit = () => {
         checkbox.type = "checkbox";
         checkbox.className = `todo-checkbox`;
         checkbox.id = i;
+
+        // check if there is a todoItem that exists
+        for (let i = 0; i < todoListItem.length; i++) {
+          if (todoListItem[i].innerText === nameChangeInput.value) {
+            alert(`You already have a todo named ${nameChangeInput.value}`);
+            nameChangeInput.value = "";
+            return;
+          }
+        }
 
         // change the name and add the checkbox
         todoListItem[todoListNum].innerHTML = nameChangeInput.value;
@@ -182,13 +192,21 @@ const edit = () => {
         checkbox.className = `todo-checkbox`;
         checkbox.id = i;
 
+        // check if there is a todoItem that exists
+        for (let i = 0; i < todoListItem.length; i++) {
+          if (todoListItem[i].innerText === newNameInput.value) {
+            alert(`You already have a todo named ${newNameInput.value}`);
+            newNameInput.value = "";
+            return;
+          }
+        }
+
         // append the checkbox and the newTodoItem
         newNameInput.value = "";
         newTodoItem.appendChild(checkbox);
         todoList.appendChild(newTodoItem);
 
         // close the modal
-        console.log(newNameInput.value);
         addModal.style.display = 'none';
 
         // if the checkbox is clicked remove the new item and the checkbox
@@ -199,4 +217,8 @@ const edit = () => {
       }
     }
   })
+}
+
+const deleteTodo = () => {
+  alert('You cannot delete the example todo');
 }
