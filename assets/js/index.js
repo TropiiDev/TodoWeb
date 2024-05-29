@@ -171,12 +171,13 @@ const edit = () => {
     const todoListItem = document.querySelectorAll('#todo-item');
     const lastTodoItem = todoListItem[todoListItem.length - 1];
 
+    // if there is no text then alert the user
     if (newNameInput.value == "") {
       alert("You need a name for this todo!");
       return;
     }
 
-    // lastTodoItem returns an array so we have to loop through it
+    // if there is not lastTodoItem then create a new entry
     if (lastTodoItem === undefined) {
       const todoNum = 0;
 
@@ -209,6 +210,8 @@ const edit = () => {
 
       return;
     }
+
+    // lastTodoItem returns an array so we have to loop through it
     for (let i = 0; i < lastTodoItem.classList.length; i++) {
       // if lastTodoItem.classList[i] returns a string, return
       if (isNaN(lastTodoItem.classList[i])) {
@@ -232,14 +235,17 @@ const edit = () => {
         // check if there is a todoItem that exists
         for (let i = 0; i < todoListItem.length; i++) {
           if (todoListItem[i].innerText === newNameInput.value) {
+
+	    // creating the error message
             const errorsDiv = document.getElementById('errors');
             const errorLabel = document.createElement('label');
             errorLabel.className = 'error';
             errorLabel.innerHTML = `You already have a todo named ${newNameInput.value}`;
 
+	    // adding the error message and making the div visible
             errorsDiv.appendChild(errorLabel);
             errorsDiv.style.display = 'block';
-            alert(`You already have a todo named ${newNameInput.value}`);
+            // alert(`You already have a todo named ${newNameInput.value}`);
             newNameInput.value = "";
             return;
           }
