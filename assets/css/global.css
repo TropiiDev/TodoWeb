@@ -117,6 +117,10 @@ nav ul a {
   padding: 2px;
 }
 
+#errors {
+  display: none;
+}
+
 /* media queries */
 
 @media (min-width: 850px) {
