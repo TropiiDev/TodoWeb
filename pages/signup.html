@@ -27,7 +27,7 @@
   </nav>
 
   <section class="hero">
-    <h2>Sign In</h2>
+    <h2>Sign Up</h2>
   </section>
 
   <section class="form-section">
@@ -40,35 +40,13 @@
         <label class="user-input-label" for="password">Password</label>
         <input class="user-input" type="password" id="password" required>
       </div>
-      <button class="submit-button" type="submit">Login</button>
+      <button class="create-account" type="submit">Create Account</button>
     </form>
-    <p>Need an account? <a href="/signup.html">Sign Up</a></p>
-    <p>Forgot your password? <button class="reset-password" id="resetPassword">Reset Password</button></p>
+    <p>Already have an account? <a href="/signin.html">Sign In</a></p>
   </section>
-
-  <div id="resetModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
-          <span class="close">×</span>
-          <h2>Reset Password</h2>
-      </div>
-      <div class="modal-body">
-          <p>Enter your email</p>
-          <form id="addModal" class="input-group">
-            <label class="user-input-label" for="emailModal">Email</label>
-            <input class="user-input" type="text" placeholder="Email" id="emailModal" required>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button class="submit-button" type="button" id="resetPass">Reset Password</button>
-      </div>
-    </div>
-  </div>
 
   <script src="https://kit.fontawesome.com/a478227047.js" crossorigin="anonymous"></script>
   <script src="/assets/js/global.js"></script>
-  <script src="/assets/js/signin.js"></script>
-  <script src="/assets/js/components/modal.js"></script>
+  <script type="module" src="/assets/js/signup.js"></script>
 </body>
 </html>

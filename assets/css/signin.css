@@ -45,3 +45,27 @@
 .login-form button:hover {
   background-color: var(--lg);
 }
+
+.form-section p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.form-section p a {
+  color: var(--lg);
+}
+
+.reset-password {
+  background-color: var(--black);
+  border: 1px solid var(--lg);
+  color: var(--lg);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.reset-password:hover {
+  background-color: var(--lg);
+  color: var(--black);
+}
