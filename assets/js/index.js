@@ -235,17 +235,7 @@ const edit = () => {
         // check if there is a todoItem that exists
         for (let i = 0; i < todoListItem.length; i++) {
           if (todoListItem[i].innerText === newNameInput.value) {
-
-	    // creating the error message
-            const errorsDiv = document.getElementById('errors');
-            const errorLabel = document.createElement('label');
-            errorLabel.className = 'error';
-            errorLabel.innerHTML = `You already have a todo named ${newNameInput.value}`;
-
-	    // adding the error message and making the div visible
-            errorsDiv.appendChild(errorLabel);
-            errorsDiv.style.display = 'block';
-            // alert(`You already have a todo named ${newNameInput.value}`);
+            alert(`You already have a todo named ${newNameInput.value}`);
             newNameInput.value = "";
             return;
           }

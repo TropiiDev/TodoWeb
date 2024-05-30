@@ -1,6 +1,7 @@
 // Get the modal element
 const editModal = document.getElementById("editModal");
 const addModal = document.getElementById("addModal");
+const errorsDiv = doucment.getElementById('errorsDiv');
 
 // Get the <span> element that closes the modal
 const span = document.querySelectorAll(".close");

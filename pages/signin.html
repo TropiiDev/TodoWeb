@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/css/signin.css">
+  <link rel="stylesheet" href="/assets/css/modal.css">
+  <title>Todos</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="../index.html"><h1>Todo</h1></a></li>
+      
+      <li class="signin"><a href="pages/signin.html">Sign Up</a></li>
+      <a class="menu-toggle" id="main-menu-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
+    </ul>
+    <div id="menu-links">
+      <ul>
+        <li class="menu-link"><a href="pages/signin.html">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h2>Login</h2>
+  </section>
+
+  <section class="form-section">
+    <form class="login-form">
+      <div class="input-group">
+        <label class="user-input-label" for="email">Email</label>
+        <input class="user-input" type="email" id="email" required>
+      </div>
+      <div class="input-group">
+        <label class="user-input-label" for="password">Password</label>
+        <input class="user-input" type="password" id="password" required>
+      </div>
+      <button class="submit-button" type="submit">Login</button>
+    </form>
+  </section>
+
+  <div id="addModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <span class="close">×</span>
+          <h2>Add a new todo</h2>
+      </div>
+      <div class="modal-body">
+          <p>Please enter the name</p>
+          <form id="addModal" class="input-group">
+            <label class="user-input-label" for="name">Name</label>
+            <input class="user-input" type="text" placeholder="New Todo" id="newName" required>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-button" type="button" id="addTodo">Add Todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/a478227047.js" crossorigin="anonymous"></script>
+  <script src="/assets/js/global.js"></script>
+  <script src="/assets/js/index.js"></script>
+  <script src="/assets/js/components/modal.js"></script>
+</body>
+</html>
