@@ -7,12 +7,32 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // remove the sign in buttons and add the new buttons
     const signInBtn = document.querySelector('.signin');
     const menuLink = document.querySelector('.menu-link');
+    const navLinks = document.querySelector('.nav-links')
+    // remove the sign in buttons and add the new buttons
     signInBtn.style.display = 'none';
     menuLink.style.display = 'none';
+
+    // create the logout button
+    const logoutBtn = document.createElement('li');
+    logoutBtn.className = 'logout';
+    logoutBtn.innerHTML = 'Logout';
+
+    // create the account button
+    const accountBtn = document.createElement('li');
+    accountBtn.innerHTML = 'Account';
+
+    // create the todos button
+    const todosBtn = document.createElement('li');
+    todosBtn.innerHTML = 'Todos';
+
+    // append the buttons to navLinks
+    navLinks.appendChild(todosBtn);
+    navLinks.appendChild(accountBtn);
+    navLinks.appendChild(logoutBtn);
   } else {
+    // no user signed in
     console.log('No user');
   }
 })

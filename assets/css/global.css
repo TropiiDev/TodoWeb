@@ -69,6 +69,10 @@ nav ul a {
   transition: 0.5s;
 }
 
+nav ul li {
+  cursor: pointer;
+}
+
 .signin {
   display: none;
 }
@@ -119,6 +123,17 @@ nav ul a {
 
 #errors {
   display: none;
+}
+
+.logout {
+  border: 1px solid var(--lg);
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.logout:hover {
+  background-color: var(--grey);
 }
 
 /* media queries */

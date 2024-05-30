@@ -14,9 +14,9 @@ span.forEach((closeBtn) => {
       if (!modal) {
         console.error('Could not find an active modal');
         return;
-      }
-
-      modal.style.display = 'none';
+      } else {
+        modal.style.display = 'none';
+      } 
     }
   })
 })
@@ -26,9 +26,15 @@ window.onclick = function (event) {
   const modalId = event.target.id;
   const modal = document.getElementById(modalId);
 
+  // if it doesn't exist then don't do anything
   if (!modal) {
     return;
   }
+  // if the nodeName of the element clicked is not DIV then don't do anything
+  if (modal.nodeName !== 'DIV') {
+    return;
+  }
 
+  // hide the element
   modal.style.display = 'none';
 };

@@ -1,11 +1,18 @@
 import { app } from './components/firebase.js';
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const createAccountBtn = document.querySelector('.create-account');
+const auth = getAuth();
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    alert('Please log out before accessing this page');
+    window.location.href = '../index.html';
+  }
+})
 
 // when the createAccountBtn is clicked, create the account.
 createAccountBtn.addEventListener('click', (e) => {
-  const auth = getAuth();
   const email = document.getElementById('email');
   const password = document.getElementById('password');
 

@@ -1,5 +1,5 @@
 import { app } from './components/firebase.js';
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // get auth from firebase
 const auth = getAuth();
@@ -12,6 +12,13 @@ const resetPassModal = document.getElementById('resetModal');
 // when the resetPassword button is clicked show the modal
 resetPassword.addEventListener('click', () => {
   resetPassModal.style.display = 'block';
+})
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    alert('Please log out before accessing this page');
+    window.location.href = '../index.html';
+  }
 })
 
 // when the signInBtn sign the user in
