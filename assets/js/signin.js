@@ -18,22 +18,22 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     alert('Please log out before accessing this page');
     window.location.href = '../index.html';
+  } else {
+    // when the signInBtn sign the user in
+    signInBtn.addEventListener('click', (e) => {
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+
+      signInWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCredential) => {
+        window.location.href = '../index.html';
+        return;
+      })
+      .catch((error) => {
+        alert(error.message);
+      })
+
+      e.preventDefault();
+    })
   }
-})
-
-// when the signInBtn sign the user in
-signInBtn.addEventListener('click', (e) => {
-  const email = document.getElementById('email');
-  const password = document.getElementById('password');
-
-  signInWithEmailAndPassword(auth, email.value, password.value)
-  .then((userCredential) => {
-    window.location.href = '../index.html';
-    return;
-  })
-  .catch((error) => {
-    alert(error.message);
-  })
-
-  e.preventDefault();
 })

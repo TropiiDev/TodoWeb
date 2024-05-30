@@ -69,8 +69,10 @@ nav ul a {
   transition: 0.5s;
 }
 
-nav ul li {
-  cursor: pointer;
+.logout,
+.account,
+.todo-button {
+  display: none;
 }
 
 .signin {
@@ -81,11 +83,18 @@ nav ul li {
   display: none;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   background-color: var(--dg);
   max-width: 850px;
   margin: 0 auto;
   padding: 1rem;
+  border-radius: 5px;
+}
+
+.ul-links {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1rem;
+
 }
 
 /* user input styles */
@@ -154,6 +163,12 @@ nav ul li {
   
   .signin:hover {
     background-color: var(--grey);
+  }
+
+  .logout,
+  .account,
+  .todo-button {
+    display: block;
   }
 
   .menu-toggle {
