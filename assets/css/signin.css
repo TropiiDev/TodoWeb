@@ -69,3 +69,7 @@
   background-color: var(--lg);
   color: var(--black);
 }
+
+.signin {
+  background-color: var(--white);
+}
