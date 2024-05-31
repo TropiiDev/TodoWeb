@@ -45,11 +45,11 @@
 
   <a class="sidebar-toggle" id="sidebar-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
 
-  <section class="page-section">
-    <h2 class="page-title">Personal</h2>
-    <p class="page-subtitle">Edit your account details!</p>
-    <div class="page">
-      <div class="name-content">
+  <section class="personal-section">
+    <h2 class="title">Personal</h2>
+    <p class="subtitle">Edit your account details!</p>
+    <div class="personal">
+      <div class="personal-content">
         <h2>Name</h2>
         <p>Change your name</p>
         <div class="input-group">
@@ -58,26 +58,22 @@
         </div>
       </div>
       <div class="email-content">
-        <h2>Email</h2>
-        <p>Change your email</p>
+        <h2>Profile Picture</h2>
+        <p>Change your profile picture</p>
         <div class="input-group">
-          <label class="user-input-label" for="email">Email</label>
-          <input class="user-input" type="email" id="email" required>
-        </div>
-      </div>
-      <div class="password-content">
-        <h2>Password</h2>
-        <p>Change your password</p>
-        <div class="input-group">
-          <label class="user-input-label" for="password">Password</label>
-          <input class="user-input" type="password" id="password" required>
+          <label class="user-input-label" for="pfp">Profile Picture</label>
+          <input class="user-input" type="text" id="pfp" required>
         </div>
       </div>
 
       <div class="button-holder">
-        <button class="submit-button" type="button" id="save">Save</button>
+        <button class="save-btn" type="button" id="save">Save</button>
       </div>
     </div>
+  </section>
+
+  <section class="account-section">
+    <h2 class="title">Account</h2>
   </section>
 
   <div id="editModal" class="modal">

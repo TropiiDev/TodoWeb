@@ -31,26 +31,19 @@ onAuthStateChanged(auth, (user) => {
         activePage.classList.remove('sidebar-active');
         sidebarLink.classList.add('sidebar-active');
 
-        updatePage(sidebarLink.querySelector('.name').innerHTML);
+        // load that page
+
+        // get the old names
+        const oldPageName = activePage.querySelector('.name').innerHTML;
+        const newPageName = sidebarLink.querySelector('.name').innerHTML;
+        
+        // find the pages
+        const oldPage = document.querySelector(`.${oldPageName.toLowerCase()}-section`);
+        const newPage = document.querySelector(`.${newPageName.toLowerCase()}-section`);
       })
     })
-
-    updatePage(activePage.querySelector('.name').innerHTML);
   } else {
     // redirect to home page
     window.location.href = '../index.html';
   }
 })
-
-const updatePage = (name) => {
-  if (name === 'Personal') {
-    console.log('Page is personal');
-  } else if (name === 'Account') {
-    console.log('Page is account');
-  } else if (name === 'Security') {
-    console.log('Page is security');
-  } else {
-    console.error('Not a valid page');
-    return;
-  }
-}
