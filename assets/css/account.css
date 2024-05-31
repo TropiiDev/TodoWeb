@@ -78,4 +78,16 @@
     background-color: var(--grey);
     border-radius: 0 10px 10px 0;
   }
+
+  .page {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "name email"
+      "password password";
+  }
+
+  .password-content {
+    max-width: 800px;
+    width: 100%;
+  }
 }
