@@ -69,13 +69,13 @@ nav ul a {
   transition: 0.5s;
 }
 
-.logout,
-.account,
-.todo-button {
+.signin {
   display: none;
 }
 
-.signin {
+.todos-a,
+.account-a,
+.logout {
   display: none;
 }
 
