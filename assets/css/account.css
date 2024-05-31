@@ -47,18 +47,45 @@
   grid-area: password;
 }
 
+.sidebar-toggle {
+  display: block;
+  position: fixed;
+  top: 100px;
+  right: 0;
+  padding: 10px;
+  background-color: var(--dg);
+  color: var(--lg);
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: var(--black);
+  color: var(--lg);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* media queries */
 @media (min-width: 850px) {
   .sidebar {
     display: block;
     position: fixed;
-    top: 100px;
-    left: 0;
+    top: 140px;
+    right: 0;
     height: 100%;
     width: 250px;
     background-color: var(--dg);
     z-index: 100;
-    border-radius: 0 10px 10px 0;
+    border-radius: 10px 0 0 10px;
   }
 
   .sidebar-link {
@@ -67,6 +94,10 @@
     color: var(--lg);
     text-decoration: none;
     transition: 0.5s;
+  }
+
+  .sidebar-link:first-child {
+    margin-top: 50px;
   }
 
   .sidebar-link:hover {
@@ -86,8 +117,14 @@
       "password password";
   }
 
-  .password-content {
-    max-width: 800px;
-    width: 100%;
+  .email-content {
+    margin-left: 10px;
+  }
+
+  .password-content { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 }

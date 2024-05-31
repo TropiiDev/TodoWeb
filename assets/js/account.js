@@ -6,8 +6,21 @@ const auth = getAuth();
 // check if the user is signed in. if not, redirect them to the home page
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     let activePage = document.querySelector('.sidebar-active');
+
+    // if someone clicks on the sidebarToggle, show the sidebar
+    sidebarToggle.addEventListener('click', () => {
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar.style.display === 'block') {
+        sidebar.style.display = 'none';
+        sidebarToggle.style.display = 'block';
+      } else {
+        sidebar.style.display = 'block';
+        sidebarToggle.style.display = 'block';
+      }
+    })
     
     // if someone clicks on a sidebarLink set that to be the active page
     sidebarLinks.forEach((sidebarLink) => {
