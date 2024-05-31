@@ -166,8 +166,8 @@ nav ul a {
   }
 
   .logout,
-  .account,
-  .todo-button {
+  .account-a,
+  .todos-a {
     cursor: pointer;
     display: block;
   }
