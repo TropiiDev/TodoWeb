@@ -3,8 +3,8 @@
   display: none;
 }
 
-/* name styles */
-.name-section {
+/* page styles */
+.page-section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +13,38 @@
   margin-top: 1rem;
 }
 
-.name-title {
+.page-title {
   font-size: 2rem;
   font-family: var(--merri);
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "name"
+    "email"
+    "password";
+}
+
+.input-group {
+  margin-top: 10px;
+}
+
+.user-input-label {
+  background-color: var(--black);
+}
+
+.name-content {
+  grid-area: name;
+}
+
+.email-content {
+  grid-area: email;
+}
+
+.password-content {
+  grid-area: password;
 }
 
 /* media queries */
