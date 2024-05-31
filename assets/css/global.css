@@ -168,6 +168,7 @@ nav ul a {
   .logout,
   .account,
   .todo-button {
+    cursor: pointer;
     display: block;
   }
 

@@ -141,4 +141,10 @@
   .explanation {
     max-width: 1200px;
   }
+  
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 }

@@ -7,65 +7,59 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/assets/css/index.css">
+  <link rel="stylesheet" href="/assets/css/account.css">
   <link rel="stylesheet" href="/assets/css/modal.css">
   <title>Todos</title>
 </head>
 <body>
   <nav>
     <ul class="nav-links">
-      <li><a href="index.html"><h1>Todo</h1></a></li>
-      <li class="signin"><a href="pages/signin.html">Sign In</a></li>
+      <li><a href="../index.html"><h1>Todo</h1></a></li>
+      <li class="todo-button"><a class="todo-a" href='./todos.html'>Todos</a></li>
+      <li class="logout">Logout</li>
       <a class="menu-toggle" id="main-menu-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
     </ul>
     <div id="menu-links">
       <ul class="ul-links">
-        <li class="menu-link"><a href="pages/signin.html">Sign In</a></li>
+        
       </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <h2>Welcome to your todo list!</h2>
-    <p>Keep track of your tasks and get things done.</p>
-  </section>
-
-  <section class="example-todos">
-    <h2>Example Todos</h2>
-    <p>Here is what a todo looks like!</p>
-    <div class="todo">
-      <h2 class="todo-title">Example Todo</h2>
-      <p class="todo-description">This is an example todo. You can add a description here to give more context to the task.</p>
-      <div class="todo-content">
-        <ul id="todo-list">
-          <li class="0" id="todo-item">Example task 1</li>
-          <li class="1" id="todo-item">Example task 2</li>
-          <li class="2" id="todo-item">Example task 3</li>
-        </ul>
-      </div>
-      <div class="todo-actions">
-        <button id="todo-action" onclick="edit()" class="todo-action">Edit</button>
-        <button id="todo-action" onclick="deleteTodo()" class="todo-action">Delete</button>
-      </div>
+  <section class="sidebar">
+    <div class="sidebar-link sidebar-active">
+      <span class="fa-solid fa-address-card"></span>
+      <h2 class="name">Personal</h2>
+    </div>
+    <div class="sidebar-link">
+      <span class="fa-solid fa-file-invoice"></span>
+      <h2 class="name">Account</h2>
+    </div>
+    <div class="sidebar-link">
+      <span class="fa-solid fa-lock"></span>
+      <h2 class="name">Security</h2>
     </div>
   </section>
 
-  <section class="explanation">
-    <h2>How to use</h2>
-    <p class="subtitle-bb">Here is how to use the example todo list!</p>
-    <ul>
-      <li>Click on the "Edit" button to change the name of the todo.</li>
-      <li>Clicking on the checkbox will delete the todo</li>
-      <li>Clicking on the title of the allow you to edit the todo</li>
-      <li>Clicking the Add button will allow you to add a new todo</li>
-      <li>Finally, clicking on the Save button will save all changes to the todo list.</li>
-    </ul>
-  </section>
+  <section class="name-section">
+    <h2 class="name-title">Personal</h2>
+    <p class="name-subtitle">Edit your account details!</p>
+    <div class="name-page">
+      <div class="name-content">
+        <h2>Name</h2>
+        <p>Change your name</p>
+        <div class="input-group">
+          <label class="user-input-label" for="name">Name</label>
+          <input class="user-input" type="text" id="name" required>
+        </div>
+      </div>
+      <div class="email-content">
 
-  <section class="footer">
-    <h2>Want to create a todo list?</h2>
-    <p>Sign up to create your own todo list and start getting things done!</p>
-    <a href="pages/signup.html" class="signin">Sign Up</a>
+      </div>
+      <div class="password-content">
+
+      </div>
+    </div>
   </section>
 
   <div id="editModal" class="modal">
@@ -110,7 +104,7 @@
 
   <script src="https://kit.fontawesome.com/a478227047.js" crossorigin="anonymous"></script>
   <script type="module" src="/assets/js/global.js"></script>
-  <script src="/assets/js/index.js"></script>
+  <script type="module" src="/assets/js/account.js"></script>
   <script src="/assets/js/components/modal.js"></script>
 </body>
 </html>

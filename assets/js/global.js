@@ -15,7 +15,12 @@ onAuthStateChanged(auth, (user) => {
     const menuLink = document.querySelector('.menu-link');
     
     // remove the sign in buttons and add the new buttons
-    signInBtn.style.display = 'none';
+    if (!signInBtn) {
+      return;
+    } else {
+      signInBtn.style.display = 'none';
+    }
+    
     menuLink.style.display = 'none';
 
     // create the logout button
@@ -28,31 +33,55 @@ onAuthStateChanged(auth, (user) => {
     logoutHamburgerBtn.innerHTML = 'Logout';
 
     // create the account button
+    const accountBtnA = document.createElement('a');
+    accountBtnA.href = './pages/account.html';
+    accountBtnA.className = 'account-a';
+
     const accountBtn = document.createElement('li');
     accountBtn.className = 'account';
     accountBtn.innerHTML = 'Account';
+
+    accountBtnA.appendChild(accountBtn);
+
+    const accountHamburgerBtnA = document.createElement('a');
+    accountHamburgerBtnA.href = './pages/account.html';
+    accountHamburgerBtnA.className = 'account-a';
 
     const accountHamburgerBtn = document.createElement('li');
     accountHamburgerBtn.className = 'menu-link';
     accountHamburgerBtn.innerHTML = 'Account';
 
+    accountHamburgerBtnA.appendChild(accountHamburgerBtn);
+
     // create the todos button
+    const todosBtnA = document.createElement('a');
+    todosBtnA.href = './pages/todos.html';
+    todosBtnA.className = 'todos-a';
+
     const todosBtn = document.createElement('li');
     todosBtn.className = 'todo-button';
     todosBtn.innerHTML = 'Todos';
+
+    todosBtnA.appendChild(todosBtn);
+
+    const todosHamburgerBtnA = document.createElement('a');
+    todosHamburgerBtnA.href = './pages/todos.html';
+    todosHamburgerBtnA.className = 'todos-a';
 
     const todosHamburgerBtn = document.createElement('li');
     todosHamburgerBtn.className = 'menu-link';
     todosHamburgerBtn.innerHTML = 'Todos';
 
+    todosHamburgerBtnA.appendChild(todosHamburgerBtn);
+
     // append the buttons to navLinks
-    navLinks.appendChild(todosBtn);
-    navLinks.appendChild(accountBtn);
+    navLinks.appendChild(todosBtnA);
+    navLinks.appendChild(accountBtnA);
     navLinks.appendChild(logoutBtn);
 
     // append the buttons to menuLinks
-    menuLinks.appendChild(todosHamburgerBtn);
-    menuLinks.appendChild(accountHamburgerBtn);
+    menuLinks.appendChild(todosHamburgerBtnA);
+    menuLinks.appendChild(accountHamburgerBtnA);
     menuLinks.appendChild(logoutHamburgerBtn);
 
     // if the logoutBtn is clicked, sign the user out

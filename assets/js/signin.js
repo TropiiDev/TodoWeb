@@ -14,9 +14,10 @@ resetPassword.addEventListener('click', () => {
   resetPassModal.style.display = 'block';
 })
 
+// if the user is signed in redirect them to the home page
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    alert('Please log out before accessing this page');
+    // redirect them
     window.location.href = '../index.html';
   } else {
     // when the signInBtn sign the user in
