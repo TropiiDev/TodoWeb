@@ -16,12 +16,12 @@
     <ul>
       <li><a href="../index.html"><h1>Todo</h1></a></li>
       
-      <li class="signin"><a href="pages/signin.html">Sign Up</a></li>
+      <li class="signin"><a href="signup.html">Sign Up</a></li>
       <a class="menu-toggle" id="main-menu-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
     </ul>
     <div id="menu-links">
       <ul>
-        <li class="menu-link"><a href="pages/signin.html">Sign Up</a></li>
+        <li class="menu-link"><a href="signup.html">Sign Up</a></li>
       </ul>
     </div>
   </nav>
@@ -40,7 +40,7 @@
         <label class="user-input-label" for="password">Password</label>
         <input class="user-input" type="password" id="password" required>
       </div>
-      <button class="submit-button" type="submit">Login</button>
+      <button class="submit-button" type="submit" id="sign-in-button">Login</button>
     </form>
     <p>Need an account? <a href="./signup.html">Sign Up</a></p>
     <p>Forgot your password? <button class="reset-password" id="resetPassword">Reset Password</button></p>
@@ -55,13 +55,33 @@
       </div>
       <div class="modal-body">
           <p>Enter your email</p>
-          <form id="addModal" class="input-group">
+          <form id="resetModal" class="input-group">
             <label class="user-input-label" for="emailModal">Email</label>
             <input class="user-input" type="text" placeholder="Email" id="emailModal" required>
           </form>
       </div>
       <div class="modal-footer">
         <button class="submit-button" type="button" id="resetPass">Reset Password</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mfaModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <span class="close">×</span>
+          <h2>MFA Sign In</h2>
+      </div>
+      <div class="modal-body">
+          <p>Enter your verification code</p>
+          <form id="mfaModal" class="input-group">
+            <label class="user-input-label" for="code">Code</label>
+            <input class="user-input" type="text" placeholder="Verification Code" id="code" required>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-button" type="button" id="mfaModalSubmit">Submit Code</button>
       </div>
     </div>
   </div>

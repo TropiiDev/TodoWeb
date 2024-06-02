@@ -17,8 +17,7 @@ onAuthStateChanged(auth, (user) => {
       createUserWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredentials) => {
         // signed up
-        userCredentials.user;
-        window.location.href = '../index.html';
+        window.location.href = '../index.hmtl'
       })
       .catch((error) => {
         console.error(error.message);

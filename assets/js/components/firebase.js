@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import {
   apiKey,
   authDomain,
@@ -12,9 +13,9 @@ const firebaseConfig = {
   apiKey: apiKey,
   authDomain: authDomain,
   projectId: projectId,
-  storageBucket: storageBucket,
   messagingSenderId: messagingSenderId,
   appId: appId
 }
 
 export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app, storageBucket);

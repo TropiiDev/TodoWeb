@@ -10,7 +10,6 @@ span.forEach((closeBtn) => {
     for (let i = 0; i < modals.length; i++) {
       const modalId = modals[i].id;
       const modal = document.getElementById(modalId);
-      console.log(modal);
       if (!modal) {
         console.error('Could not find an active modal');
         return;

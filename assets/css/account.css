@@ -1,3 +1,9 @@
+/* navigation styles */
+
+.signin {
+  display: none;
+}
+
 /* sidebar styles */
 .sidebar {
   display: none;
@@ -16,6 +22,8 @@
 .title {
   font-size: 2rem;
   font-family: var(--merri);
+  margin: 0;
+  padding: 0;
 }
 
 .personal {
@@ -40,31 +48,14 @@
   grid-area: name;
 }
 
-.email-content {
-  grid-area: email;
-}
-
-.password-content {
-  grid-area: password;
-}
-
 .sidebar-toggle {
-  display: block;
-  position: fixed;
-  top: 100px;
-  right: 0;
-  padding: 10px;
-  background-color: var(--dg);
-  color: var(--lg);
-  border-radius: 10px 0 0 10px;
-  cursor: pointer;
+  display: none;
 }
 
 .button-holder {
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
 }
 
 .save-btn {
@@ -87,6 +78,82 @@
 
 .account-section {
   display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.verify-email {
+  display: none;
+  margin-top: 15px;
+  flex-direction: column;
+}
+
+.verify-email button {
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid var(--lg);
+  border-radius: 5px;
+  background-color: var(--black);
+  color: var(--white);
+  transition: 0.5s;
+}
+
+.verify-email button:hover {
+  background-color: var(--lg);
+  color: var(--black);
+}
+
+.account-div {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "email"
+    "password";
+}
+
+.change-password-btn {
+  margin-top: 15px;
+  padding: 10px;
+  border: 2px solid var(--lg);
+  border-radius: 5px;
+  background-color: var(--black);
+  color: var(--white);
+  transition: 0.5s;
+}
+
+.change-password-btn:hover {
+  background-color: var(--lg);
+  color: var(--black);
+}
+
+#changePasswordModal .user-input-label {
+  background-color: var(--dg);
+}
+
+.email-content {
+  grid-area: email;
+}
+
+.password-content {
+  grid-area: password;
+}
+
+.verification-code {
+  display: none;
+}
+
+/* security styles */
+
+.security-section {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.number-content {
+  margin-top: 15px;
 }
 
 /* media queries */
@@ -136,10 +203,25 @@
     margin-left: 10px;
   }
 
-  .password-content { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  .sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 100px;
+    right: 0;
+    padding: 10px;
+    background-color: var(--dg);
+    color: var(--lg);
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+  }
+
+  .account-div {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "email password";
+  }
+
+  .password-content {
+    margin-left: 10px;
   }
 }

@@ -14,14 +14,13 @@
 <body>
   <nav>
     <ul class="nav-links">
-      <li><a href="../index.html"><h1>Todo</h1></a></li>
-      <li class="todo-button"><a class="todo-a" href='./todos.html'>Todos</a></li>
-      <li class="logout">Logout</li>
+      <li><a href="index.html"><h1>Todo</h1></a></li>
+      <li class="signin"><a href="pages/signin.html">Sign In</a></li>
       <a class="menu-toggle" id="main-menu-toggle"><span class="hamburg fa-solid fa-bars-staggered" aria-hidden="false"></span></a>
     </ul>
     <div id="menu-links">
       <ul class="ul-links">
-        
+        <li class="menu-link"><a href="pages/signin.html">Sign In</a></li>
       </ul>
     </div>
   </nav>
@@ -47,7 +46,7 @@
 
   <section class="personal-section">
     <h2 class="title">Personal</h2>
-    <p class="subtitle">Edit your account details!</p>
+    <p class="subtitle">Edit your personal details!</p>
     <div class="personal">
       <div class="personal-content">
         <h2>Name</h2>
@@ -61,57 +60,85 @@
         <h2>Profile Picture</h2>
         <p>Change your profile picture</p>
         <div class="input-group">
-          <label class="user-input-label" for="pfp">Profile Picture</label>
-          <input class="user-input" type="text" id="pfp" required>
+          <input type="file" id="pfp" required>
         </div>
       </div>
 
-      <div class="button-holder">
-        <button class="save-btn" type="button" id="save">Save</button>
-      </div>
+    </div>
+    <div class="button-holder">
+      <button class="save-btn personal-btn" type="button" id="save">Save</button>
     </div>
   </section>
 
   <section class="account-section">
     <h2 class="title">Account</h2>
-  </section>
-
-  <div id="editModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
-          <span class="close">×</span>
-          <h2>Change the name</h2>
+    <p class="subtitle">Edit your account details!</p>
+    <div class="verify-email">
+      <h2>Verify Email</h2>
+      <p>Verify your email</p>
+      <button class="verify-btn account-btn" type="button" id="verify-email">Verify</button>
+    </div>
+    </div>
+    <div class="account-div">
+      <div class="email-content">
+        <h2>Email</h2>
+        <p>Edit your email</p>
+        <div class="input-group">
+          <label for="email" class="user-input-label">Email</label>
+          <input class="user-input" type="email" id="emailInput" />
+        </div>
       </div>
-      <div class="modal-body">
-          <p>Please enter the new name</p>
-          <div class="input-group">
-            <label class="user-input-label" for="nameChange">Name</label>
-            <input class="user-input" type="text" id="nameChange" required>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button class="submit-button" type="button" id="changeName">Change Name</button>
+      <div class="password-content">
+        <h2>Password</h2>
+        <p>Change your password</p>
+        <button class="submit-button change-password-btn" type="button" id="change-password">Change Password</button>
       </div>
     </div>
-  </div>
+    <div class="account-button-holder">
+      <button class="save-btn update-account-btn" type="button" id="save">Save</button>
+    </div>
+  </section>
 
-  <div id="addModal" class="modal">
+  <section class="security-section">
+    <h2 class="title">Security</h2>
+    <p class="subtitle">Enable 2FA</p>
+    <div class="security">
+      <div class="number-content">
+        <h2>Phone Number</h2>
+        <p>Please enter your number to enable MFA</p>
+        <div class="input-group">
+          <label class="user-input-label" for="number">Phone Number</label>
+          <input placeholder="0000000000" class="user-input" id="number" type="number" /> 
+        </div>
+        <div class="input-group verification-code">
+          <label class="user-input-label" for="code">Verification Code</label>
+          <input placeholder="000000" class="user-input" id="verification-code" type="number" />
+
+          <button class="submit-button" type="button" id="verify">Verify</button>
+        </div>
+      </div>
+      <div class="button-holder">
+        <button class="save-btn security-btn" type="button" id="sign-in-button">Save</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="changePasswordModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
           <span class="close">×</span>
-          <h2>Add a new todo</h2>
+          <h2>Change Password</h2>
       </div>
       <div class="modal-body">
-          <p>Please enter the name</p>
-          <form id="addModal" class="input-group">
-            <label class="user-input-label" for="newName">Name</label>
-            <input class="user-input" type="text" placeholder="New Todo" id="newName" required>
+          <p>Enter the new password</p>
+          <form id="newPassword" class="input-group">
+            <label class="user-input-label" for="newPasswordModal">New Password</label>
+            <input class="user-input" type="password" placeholder="New Password" id="newPasswordModal" required>
           </form>
       </div>
       <div class="modal-footer">
-        <button class="submit-button" type="button" id="addTodo">Add Todo</button>
+        <button class="submit-button" type="button" id="changePass">Change Password</button>
       </div>
     </div>
   </div>
