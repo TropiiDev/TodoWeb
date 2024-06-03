@@ -25,6 +25,16 @@ onAuthStateChanged(auth, (user) => {
     let activePage = document.querySelector('.sidebar-active');
 
     const logoutBtn = document.querySelector('.logout');
+    const navbarAccountBtn = document.querySelector('.account-button');
+    const navbarTodoBtn = document.querySelector('.todo-button');
+    
+    navbarTodoBtn.addEventListener('click', () => {
+      window.location.href = './todo.html';
+    })
+
+    navbarAccountBtn.addEventListener('click', () => {
+      window.location.href = './account.html';
+    })
 
     // if the logoutBtn is clicked, sign the user out
     logoutBtn.addEventListener('click', () => {
