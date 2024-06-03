@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
 
     // create the todos button
     const todosBtn = document.createElement('li');
-    todosBtn.className = 'todo todo-button';
+    todosBtn.className = 'todo-button';
     todosBtn.innerHTML = 'Todos';
 
     const todosHamburgerBtn = document.createElement('li');

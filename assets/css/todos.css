@@ -12,15 +12,15 @@
   font-family: var(--merri);
 }
 
-/* example todos styles */
+/* universal todos styles */
 
-.example-todos {
+.todo {
   max-width: 850px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-.example-todos h2 {
+.todo .title {
   font-family: var(--merri);
   margin-bottom: 10px;
 }
@@ -76,69 +76,40 @@
   color: var(--dg);
 }
 
-/* explanation styles */
-.explanation {
-  max-width: 850px;
-  margin: 0 auto;
-  text-align: center;
+/* create new todo styles */
+
+.create-new-todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 10px;
 }
 
-.explanation h2 {
+.create-new-todo h2 {
   font-family: var(--merri);
 }
 
-.explanation p {
+.create-new-todo button {
+  margin-top: 15px;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--dg);
+  color: var(--white);
   font-family: var(--sans);
-  font-size: 1rem;
-  margin-bottom: 5px;
-}
-
-.subtitle-bb {
-  width: 100%;
-  border-bottom: 2px solid var(--lg);
-}
-
-.explanation ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* footer styles */
-
-.footer {
-  margin-top: 25px;
-  background-color: var(--lg);
-  color: var(--dg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.footer a {
-  color: var(--dg);
-  text-decoration: underline;
-  display: block;
-  padding: 10px 15px;
+  cursor: pointer;
   transition: 0.5s;
 }
 
-.footer a:hover {
-  color: var(--grey);
-  background-color: var(--black);
-  border-radius: 10px;
+.create-new-todo button:hover {
+  background-color: var(--lg);
+  color: var(--dg);
 }
 
 /* media queries */
 
 @media (min-width: 850px) {
   .example-todos {
-    max-width: 1200px;
-  }
-
-  .explanation {
     max-width: 1200px;
   }
 }
