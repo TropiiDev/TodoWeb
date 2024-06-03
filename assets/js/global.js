@@ -71,7 +71,7 @@ onAuthStateChanged(auth, (user) => {
       }
     } else if (user.photoURL !== null) {
       username.remove();
-      console.log(user.photoURL);
+
       const profilePicture = document.createElement('img');
       profilePicture.src = user.photoURL;
       profilePicture.className = 'profile-picture account account-button';

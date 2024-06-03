@@ -98,8 +98,6 @@ onAuthStateChanged(auth, (user) => {
       const nameInputField = document.querySelector('#name');
       const pictureInputField = document.querySelector('#pfp');
 
-      console.log(pictureInputField.files[0]);
-
       if (nameInputField.value !== "" && pictureInputField.files[0] !== undefined) {
         // update the user.displayName and append the pictureInputField to firebase storage
         const storageRef = ref(storage, `images/${user.uid}`);
@@ -125,9 +123,10 @@ onAuthStateChanged(auth, (user) => {
               photoURL: url
             })
           })
+          alert('Please refresh the page for changes to take effect');
+          //window.location.reload();
         })
 
-        window.location.reload();
       } else if (nameInputField.value !== "") {
         // update the user.displayName
         
@@ -141,7 +140,6 @@ onAuthStateChanged(auth, (user) => {
           console.error(error.message);
         })
 
-        window.location.reload();
         // if no value for the nameInputField was entered but an image was, add the image and update photoURL
       } else if (pictureInputField.files[0] !== undefined) {
         // get the storage ref
@@ -156,9 +154,11 @@ onAuthStateChanged(auth, (user) => {
               photoURL: url
             })
           })
+          console.log(user.photoURL);
+          alert('Please refresh the page for changes to take effect');
+          //window.location.reload();
         })
 
-        window.location.reload();
       } else {
         // if no values were entered, reload the page
         window.location.reload();
