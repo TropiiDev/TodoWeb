@@ -12,28 +12,6 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     // signed in
 
-    // when a user clicks the button, send them to the correct place
-    const logoutBtn = document.querySelector('.logout-button');
-    const navbarAccountBtn = document.querySelector('.account-button');
-    const navbarTodoBtn = document.querySelector('.todo-button');
-    
-    navbarTodoBtn.addEventListener('click', () => {
-      window.location.href = './todo.html';
-    })
-
-    navbarAccountBtn.addEventListener('click', () => {
-      window.location.href = './account.html';
-    })
-
-    // if the logoutBtn is clicked, sign the user out
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth).then(() => {
-        window.location.href = './signin.html';
-      }).catch((error) => {
-        console.error(error.message);
-      })
-    })
-
     // load the existing todos
     const todosRef = ref(database, `users/${user.uid}`);
 
@@ -41,8 +19,42 @@ onAuthStateChanged(auth, (user) => {
       const data = snapshot.val();
       if (data !== null) {
         const todoName = Object.keys(data)[0];
-        const todoDescription = Object.entries(data)[0][1];
-        console.log(todoDescription);
+        const newTodosRef = ref(database, `users/${user.uid}/${todoName}`);
+        onValue(newTodosRef, (newSnapshot) => {
+          const newData = newSnapshot.val();
+          const todoDescription = Object.values(newData)[0];
+          const tasks = Object.values(newData)[1];
+          const todoSection = document.querySelector('.todo');
+
+          // create the new todo list
+          const todoDiv = document.createElement('div');
+          todoDiv.className = `todo-div ${todoName}`;
+
+          const todoH2 = document.createElement('h2');
+          todoH2.className = `title ${todoName}`;
+          todoH2.innerHTML = todoName;
+          todoDiv.appendChild(todoH2);
+
+          const todoP = document.createElement('p');
+          todoP.className = `description ${todoName}`;
+          todoP.innerHTML = todoDescription
+          todoDiv.appendChild(todoP);
+
+          const todoUl = document.createElement('ul');
+          todoUl.className = todoName;
+          todoUl.id = 'todo-list';
+          todoDiv.appendChild(todoUl);
+
+          for (let i = 0; i < tasks.length; i++) {
+            const taskItem = document.createElement('li');
+            taskItem.className = `${i} ${todoName}`;
+            taskItem.innerHTML = tasks[i];
+            taskItem.id = 'todo-item';
+            todoUl.appendChild(taskItem);
+          }
+
+          todoSection.appendChild(todoDiv);
+        })
       } else {
         console.info('User has no todo lists');
       }

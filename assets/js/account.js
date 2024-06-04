@@ -24,24 +24,30 @@ onAuthStateChanged(auth, (user) => {
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     let activePage = document.querySelector('.sidebar-active');
 
-    const logoutBtn = document.querySelector('.logout');
-    const navbarAccountBtn = document.querySelector('.account-button');
-    const navbarTodoBtn = document.querySelector('.todo-button');
-    
-    navbarTodoBtn.addEventListener('click', () => {
-      window.location.href = './todo.html';
+    // add the event listeners to the buttons
+    const logoutBtns = document.querySelectorAll('.logout-button');
+    const accountBtns = document.querySelectorAll('.account-button');
+    const todoBtns = document.querySelectorAll('.todo-button');
+
+    logoutBtns.forEach((logoutBtn) => {
+      logoutBtn.addEventListener('click', () => {
+        signOut(auth).then(() => {
+          window.location.href = './signin.html';
+        }).catch((error) => {
+          console.error(error.message);
+        })
+      })
     })
 
-    navbarAccountBtn.addEventListener('click', () => {
-      window.location.href = './account.html';
+    accountBtns.forEach((accountBtn) => {
+      accountBtn.addEventListener('click', () => {
+        window.location.href = './account.html';
+      })
     })
 
-    // if the logoutBtn is clicked, sign the user out
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth).then(() => {
-        window.location.href = './signin.html';
-      }).catch((error) => {
-        console.error(error.message);
+    todoBtns.forEach((todoBtn) => {
+      todoBtn.addEventListener('click', () => {
+        window.location.href = './todo.html';
       })
     })
 
