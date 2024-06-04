@@ -1,8 +1,9 @@
-import { app } from './components/firebase.js';
+import { app, database } from './components/firebase.js';
 import { 
   getAuth,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const auth = getAuth();
 
@@ -10,6 +11,28 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // signed in
+
+    // when a user clicks the button, send them to the correct place
+    const logoutBtn = document.querySelector('.logout');
+    const navbarAccountBtn = document.querySelector('.account-button');
+    const navbarTodoBtn = document.querySelector('.todo-button');
+    
+    navbarTodoBtn.addEventListener('click', () => {
+      window.location.href = './todo.html';
+    })
+
+    navbarAccountBtn.addEventListener('click', () => {
+      window.location.href = './account.html';
+    })
+
+    // if the logoutBtn is clicked, sign the user out
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = './signin.html';
+      }).catch((error) => {
+        console.error(error.message);
+      })
+    })
 
     // when the user clicks the createTodoBtn, show the modal.
     const createTodoBtn = document.querySelector('#createTodoButton');
@@ -26,7 +49,14 @@ onAuthStateChanged(auth, (user) => {
         const newTodoDescription = document.querySelector('#newTodoDescription');
         const firstTask = document.querySelector('#firstTask');
 
-        console.log(`Todo Name: ${newTodoName.value}\nTodo Description: ${newTodoDescription.value}\nFirst Task: ${firstTask.value}`);
+        set(ref(database, `users/${user.uid}/${newTodoName.value}`), {
+          description: newTodoDescription.value,
+          tasks: [firstTask.value]
+        })
+
+        
+
+        createNewTodoModal.style.display = 'none';
       })
     })
   } else {
