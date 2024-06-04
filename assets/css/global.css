@@ -73,8 +73,8 @@ nav ul a {
   display: none;
 }
 
-.todo,
-.account,
+.todo-button,
+.account-button,
 .logout {
   cursor: pointer;
   display: none;
@@ -96,6 +96,10 @@ nav ul a {
   flex-flow: column wrap;
   gap: 1rem;
 
+}
+
+.menu-link {
+  display: block;
 }
 
 .profile-picture {
@@ -172,8 +176,8 @@ nav ul a {
     background-color: var(--grey);
   }
 
-  .todo,
-  .account,
+  .todo-button,
+  .account-button,
   .logout {
     cursor: pointer;
     display: block;

@@ -3,7 +3,7 @@ import {
   getAuth,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const auth = getAuth();
 
@@ -13,7 +13,7 @@ onAuthStateChanged(auth, (user) => {
     // signed in
 
     // when a user clicks the button, send them to the correct place
-    const logoutBtn = document.querySelector('.logout');
+    const logoutBtn = document.querySelector('.logout-button');
     const navbarAccountBtn = document.querySelector('.account-button');
     const navbarTodoBtn = document.querySelector('.todo-button');
     
@@ -34,6 +34,19 @@ onAuthStateChanged(auth, (user) => {
       })
     })
 
+    // load the existing todos
+    const todosRef = ref(database, `users/${user.uid}`);
+
+    onValue(todosRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        const todoName = Object.keys(data)[0];
+        const todoDescription = Object.entries(data)[0][1];
+        console.log(todoDescription);
+      } else {
+        console.info('User has no todo lists');
+      }
+    })
     // when the user clicks the createTodoBtn, show the modal.
     const createTodoBtn = document.querySelector('#createTodoButton');
 
@@ -54,9 +67,7 @@ onAuthStateChanged(auth, (user) => {
           tasks: [firstTask.value]
         })
 
-        
-
-        createNewTodoModal.style.display = 'none';
+        window.location.reload();
       })
     })
   } else {
