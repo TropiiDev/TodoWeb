@@ -20,7 +20,7 @@
   padding: 1rem;
 }
 
-.todo .title {
+.todo {
   font-family: var(--merri);
   margin-bottom: 10px;
 }
@@ -32,14 +32,18 @@
   padding: 1rem;
 }
 
-.todo-title {
+.title {
+  margin: 0;
+  padding: 0;
   font-family: var(--merri);
   font-size: 1.3rem;
 }
 
-.todo-description {
+.description {
   font-family: var(--sans);
   font-size: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 .todo-content {
