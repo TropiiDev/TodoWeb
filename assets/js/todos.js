@@ -26,7 +26,7 @@ onAuthStateChanged(auth, (user) => {
         // get all the names of the objects
         for (let key in data) {
           if (key.indexOf(' ') > 0) {
-            const newTodoName = key.replace(/ /g, '+');
+            const newTodoName = key.replace(/ /g, '-');
             todoName.push(newTodoName);
           } else {
             todoName.push(key);
@@ -59,7 +59,11 @@ onAuthStateChanged(auth, (user) => {
             // set the name of the todos
             const todoH2 = document.createElement("h2");
             todoH2.className = `title ${todoName[i]}`;
-            todoH2.innerHTML = todoName[i];
+            if (todoName[i].indexOf('-') > 0) {
+              todoH2.innerHTML = todoName[i].replace(/-/g,' ');
+            } else {
+              todoH2.innerHTML = todoName[i];
+            }
             todoDiv.appendChild(todoH2);
 
             // set the description
@@ -131,6 +135,8 @@ onAuthStateChanged(auth, (user) => {
           const btnId = actionBtn.id;
           if (btnName === "Edit") {
             editTodo(user.uid, btnId);
+          } else if (btnName === "Delete") {
+            deleteTodo(user.uid, btnId);
           }
         });
       });
@@ -154,7 +160,7 @@ onAuthStateChanged(auth, (user) => {
         const firstTask = document.querySelector("#firstTask");
 
         if (newTodoName.value.indexOf(' ') > 0) {
-          const newName = newTodoName.value.replace(/ /g, '+');
+          const newName = newTodoName.value.replace(/ /g, '-');
           console.log(newName)
 
           set(ref(database, `users/${user.uid}/${newName}`), {
@@ -192,13 +198,11 @@ onAuthStateChanged(auth, (user) => {
 
 const editTodo = (uid, name) => {
   // hide the old buttons
-  console.log(name);
+  console.log(`${name}-actions`);
+  const todoActionsDiv = document.querySelector(`#${name}-actions`);
   const todoActions = document.querySelectorAll(`#${name}`);
-  const todoActionsDiv = document.querySelectorAll(`#${name}`);
 
-  console.log(todoActionsDiv);
-
-  /*
+  // loop through the buttons and hide them
   for (let i = 0; i < todoActions.length; i++) {
     const todoAction = todoActions[i];
     if (todoAction.id === name) {
@@ -233,12 +237,15 @@ const editTodo = (uid, name) => {
     window.location.reload();
   });
 
+  // when the newAddBtn is clicked, add the new task
   newAddBtn.addEventListener("click", () => {
     const addTodoModal = document.querySelector("#addModal");
     const addTodoBtn = document.querySelector("#addTodo");
 
+    // set the modal to a flex
     addTodoModal.style.display = "flex";
 
+    // when its clicked, just find the indexNum of the next todo in the list.
     addTodoBtn.addEventListener("click", () => {
       const addTodoName = document.querySelector("#newName");
 
@@ -255,6 +262,7 @@ const editTodo = (uid, name) => {
           indexNum = num;
         }
       });
+      // create the new task
       set(
         ref(database, `/users/${uid}/${name}/todos/${Number(indexNum) + 1}`),
         {
@@ -263,10 +271,8 @@ const editTodo = (uid, name) => {
       );
       alert("Added the new todo");
       window.location.reload();
-      
     });
   });
-  */
 };
 
 const deleteTodo = (uid, name) => {
