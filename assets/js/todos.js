@@ -83,13 +83,13 @@ onAuthStateChanged(auth, (user) => {
             todoUl.id = "todo-list";
             todoContent.appendChild(todoUl);
 
-            // loop through all the todos
+            // loop through all the todos then create the todo item
             for (let todo in todos) {
-              const todoName = Object.values(todos)[todo].name;
+              const todoNameObj = Object.values(todos)[todo].name;
 
               const taskItem = document.createElement("li");
-              taskItem.className = i;
-              taskItem.innerHTML = todoName;
+              taskItem.className = `${todo} ${todoName[i]}-task`;
+              taskItem.innerHTML = todoNameObj;
               taskItem.id = "todo-item";
               todoUl.appendChild(taskItem);
             }
@@ -161,7 +161,6 @@ onAuthStateChanged(auth, (user) => {
 
         if (newTodoName.value.indexOf(' ') > 0) {
           const newName = newTodoName.value.replace(/ /g, '-');
-          console.log(newName)
 
           set(ref(database, `users/${user.uid}/${newName}`), {
             description: newTodoDescription.value,
@@ -198,9 +197,9 @@ onAuthStateChanged(auth, (user) => {
 
 const editTodo = (uid, name) => {
   // hide the old buttons
-  console.log(`${name}-actions`);
   const todoActionsDiv = document.querySelector(`#${name}-actions`);
   const todoActions = document.querySelectorAll(`#${name}`);
+  const todoItems = document.querySelectorAll(`.${name}-task`);
 
   // loop through the buttons and hide them
   for (let i = 0; i < todoActions.length; i++) {
@@ -212,6 +211,32 @@ const editTodo = (uid, name) => {
     }
   }
 
+  // create all the checkboxes when the edit btn is clicked
+  for (let i = 0; i < todoItems.length; i++) {
+    const todoItem = todoItems[i];
+    
+    const checkboxes = document.createElement('input');
+    checkboxes.type = 'checkbox';
+    checkboxes.style.marginLeft = '5px';
+    checkboxes.className = 'delete-item';
+    checkboxes.id = i;
+    todoItem.appendChild(checkboxes);
+  }
+
+  // when the checkbox is clicked. delete that todoItem
+  const checkboxes = document.querySelectorAll('.delete-item');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', () => {
+      const checkboxId = checkbox.id;
+      
+      // delete the item in the database
+      set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
+      alert("Deleted that todo item");
+      window.location.reload();
+    })
+  })
+
   // create the add and save buttons
   const addBtn = document.createElement("button");
   addBtn.className = "todo-action";
@@ -220,7 +245,7 @@ const editTodo = (uid, name) => {
 
   const saveBtn = document.createElement("button");
   saveBtn.className = "todo-action";
-  saveBtn.id = "save";
+  saveBtn.id = `${name}-save`;
   saveBtn.style.marginLeft = "5px";
   saveBtn.innerHTML = "Save";
 
@@ -229,7 +254,7 @@ const editTodo = (uid, name) => {
   todoActionsDiv.appendChild(saveBtn);
 
   // select the new buttons
-  const newSaveBtn = document.querySelector("#save");
+  const newSaveBtn = document.querySelector(`#${name}-save`);
   const newAddBtn = document.querySelector("#add");
 
   // when the newSaveBtn is clicked, reload the page to "save" it
