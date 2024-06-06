@@ -57,15 +57,11 @@
   margin-left: 10px;
 }
 
-.todo-actions {
-  gap: 1rem;
-}
-
 .add {
   margin-right: 5px;
 }
 
-.todo-actions button {
+.todo-action {
   padding: 0.5rem 1rem;
   border: none;
   background-color: var(--dg);
@@ -75,7 +71,7 @@
   transition: 0.5s;
 }
 
-.todo-actions button:hover {
+.todo-action:hover {
   background-color: var(--lg);
   color: var(--dg);
 }

@@ -83,7 +83,9 @@ onAuthStateChanged(auth, (user) => {
 
           // create the todoActionsDiv
           const todoActionsDiv = document.createElement('div');
-          todoActionsDiv.className = 'todo-actions';
+          todoActionsDiv.className = `todo-actions-${todoName[i]}`;
+          todoActionsDiv.style.margin = '0';
+          todoActionsDiv.style.padding = '0';
           todoDiv.appendChild(todoActionsDiv);
 
           // create the Edit button
@@ -104,27 +106,24 @@ onAuthStateChanged(auth, (user) => {
           // append all that to the todoSection
           todoSection.appendChild(todoDiv);
 
-          // when the user clicks a todoActionBtn, do that action
-          const todoActionBtn = document.querySelectorAll('.todo-action');
-
-          todoActionBtn.forEach((todoAction) => {
-            todoAction.addEventListener('click', () => {
-              console.log(todoAction);
-              const todoActionName = todoAction.innerHTML;
-              const todoName = todoAction.id;
-              if (todoActionName === "Edit") {
-                editTodo(user.uid, todoName);
-              } else if (todoActionName === "Delete") {
-                deleteTodo(user.uid, todoName);
-              }
-            })
-          })
         })
         }
       } else {
         // the user has no lists
         console.info('User has no todo lists');
       }
+
+      // when the user clicks a todoActionBtn, do that action
+      const actionBtns = document.querySelectorAll('.todo-action');
+      actionBtns.forEach((actionBtn) => {
+        actionBtn.addEventListener('click', () => {
+          const btnName = actionBtn.innerHTML;
+          const btnId = actionBtn.id;
+          if (btnName === "Edit") {
+            editTodo(user.uid, btnId);
+          }
+        })
+      })
     })
 
     // when the user clicks the createTodoBtn, show the modal.
@@ -165,12 +164,7 @@ const editTodo = (uid, name) => {
   // hide the old buttons
   console.log(name)
   const todoActions = document.querySelectorAll(`#${name}`);
-  const todoActionsDiv = document.querySelector('.todo-actions');
-
-  /*
-    IF THERE ARE MULTIPLE TODOS IT WILL RUN TWICE, FIND A WAY TO LOOP THROUGH THE TODO LISTS
-    AND FIND WHICH BUTTON WAS PRESSED
-  */
+  const todoActionsDiv = document.querySelectorAll(`.todo-actions-${name}`);
 
   for (let i = 0; i < todoActions.length; i++) {
     const todoAction = todoActions[i];
@@ -180,6 +174,8 @@ const editTodo = (uid, name) => {
       return;
     }
   }
+
+  console.log(todoActionsDiv)
 
   // create the add and save buttons
   const addBtn = document.createElement('button');
