@@ -55,6 +55,7 @@ onAuthStateChanged(auth, (user) => {
             // create the div of the todo
             const todoDiv = document.createElement("div");
             todoDiv.className = `todo-div ${todoName[i]}`;
+            todoSection.appendChild(todoDiv);
 
             // set the name of the todos
             const todoH2 = document.createElement("h2");
@@ -84,25 +85,24 @@ onAuthStateChanged(auth, (user) => {
             todoContent.appendChild(todoUl);
 
             // loop through all the todos then create the todo item
-            for (let todo in todos) {
-              if (todo > 1 && todo != 1) {
-                if (todo >= 2) {
-                  const todoNameObj = Object.values(todos)[todo - 1].name;
-                  
-                  const taskItem = document.createElement("li");
-                  taskItem.className = `${todo} ${todoName[i]}-task`;
-                  taskItem.innerHTML = todoNameObj;
-                  taskItem.id = "todo-item";
-                  todoUl.appendChild(taskItem);
-                }
+            for (let index = 0; index < Object.values(todos).length; index++) {
+              const todoObject = Object.values(todos)[index];
+              if (todoObject === undefined) {
+                continue;
               } else {
-                const todoNameObj = Object.values(todos)[i].name;
+                // the item does exist
+                const todoItemName = todoObject.name;
+                const todoItemNum = []
 
-                const taskItem = document.createElement("li");
-                taskItem.className = `${todo} ${todoName[i]}-task`;
-                taskItem.innerHTML = todoNameObj;
-                taskItem.id = "todo-item";
-                todoUl.appendChild(taskItem);
+                for (let num in todos) {
+                  todoItemNum.push(num);
+                }
+                
+                const todoItem = document.createElement('li');
+                todoItem.className = `${todoName[i]}-task`;
+                todoItem.id = todoItemNum[index];
+                todoItem.innerHTML = todoItemName;
+                todoUl.appendChild(todoItem);
               }
             }
 
@@ -129,9 +129,6 @@ onAuthStateChanged(auth, (user) => {
             todoDeleteBtn.innerHTML = "Delete";
             todoDeleteBtn.style.marginLeft = "5px";
             todoActionsDiv.appendChild(todoDeleteBtn);
-
-            // append all that to the todoSection
-            todoSection.appendChild(todoDiv);
           });
         }
       } else {
@@ -223,32 +220,27 @@ const editTodo = (uid, name) => {
     }
   }
 
-  // create all the checkboxes when the edit btn is clicked
-  const todosRef = ref(database, `users/${uid}/${name}/todos`);
-  onValue(todosRef, (snapshot) => {
+  const getTodosRef = ref(database, `users/${uid}/${name}/todos`);
+
+  onValue(getTodosRef, (snapshot) => {
     const data = snapshot.val();
-    let todoItem = "";
+    let entries = [];
 
-    for (let i = 0; i < todoItems.length; i++) {
-      // creates the todo item.
-      todoItem = todoItems[i];
+    for (let i = 0; i < Object.entries(data).length; i++) {
+      const nums = Object.entries(data)[i][0];
+      entries.push(nums);
     }
 
-    /*
-      \\ Creates the checkboxes
-    const checkboxes = document.createElement('input');
-    checkboxes.type = 'checkbox';
-    checkboxes.style.marginLeft = '5px';
-    checkboxes.className = 'delete-item';
-    checkboxes.id = num;
-    todoItem.appendChild(checkboxes);
-    */
-
-    for (let num in data) {
-      // returns 0, 2, 3. need to set id of checkbox to these values;
+    for (let i = 0; i < entries.length; i++) {
+      const todoItem = todoItems[i];
+      
+      const checkboxes = document.createElement('input');
+      checkboxes.type = 'checkbox';
+      checkboxes.style.marginLeft = '5px';
+      checkboxes.className = 'delete-item';
+      checkboxes.id = entries[i];
+      todoItem.appendChild(checkboxes);
     }
-
-    
   })
 
   // when the checkbox is clicked. delete that todoItem
@@ -257,20 +249,9 @@ const editTodo = (uid, name) => {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', () => {
       const checkboxId = checkbox.id;
-      console.log(checkboxId);
       
-      // delete the item in the database
-      //set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
-      const todosRef = ref(database, `users/${uid}/${name}/todos`);
-      onValue(todosRef, (snapshot) => {
-        const data = snapshot.val();
-
-        for (let num in data) {
-          console.log(num);
-        }
-      })
-      //alert("Deleted that todo item");
-      //window.location.reload();
+      set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
+      window.location.reload();
     })
   })
 
@@ -329,7 +310,6 @@ const editTodo = (uid, name) => {
           name: addTodoName.value,
         },
       );
-      alert("Added the new todo");
       window.location.reload();
     });
   });
@@ -337,6 +317,5 @@ const editTodo = (uid, name) => {
 
 const deleteTodo = (uid, name) => {
   set(ref(database, `users/${uid}/${name}`), null);
-  alert("Deleted the todo list");
   window.location.reload();
 };
