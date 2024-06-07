@@ -85,13 +85,25 @@ onAuthStateChanged(auth, (user) => {
 
             // loop through all the todos then create the todo item
             for (let todo in todos) {
-              const todoNameObj = Object.values(todos)[todo].name;
+              if (todo > 1 && todo != 1) {
+                if (todo >= 2) {
+                  const todoNameObj = Object.values(todos)[todo - 1].name;
+                  
+                  const taskItem = document.createElement("li");
+                  taskItem.className = `${todo} ${todoName[i]}-task`;
+                  taskItem.innerHTML = todoNameObj;
+                  taskItem.id = "todo-item";
+                  todoUl.appendChild(taskItem);
+                }
+              } else {
+                const todoNameObj = Object.values(todos)[i].name;
 
-              const taskItem = document.createElement("li");
-              taskItem.className = `${todo} ${todoName[i]}-task`;
-              taskItem.innerHTML = todoNameObj;
-              taskItem.id = "todo-item";
-              todoUl.appendChild(taskItem);
+                const taskItem = document.createElement("li");
+                taskItem.className = `${todo} ${todoName[i]}-task`;
+                taskItem.innerHTML = todoNameObj;
+                taskItem.id = "todo-item";
+                todoUl.appendChild(taskItem);
+              }
             }
 
             // create the todoActionsDiv
@@ -171,7 +183,7 @@ onAuthStateChanged(auth, (user) => {
             },
           });
 
-          window.location.reload();
+          window.location.reload()
 
           return;
         }
@@ -212,16 +224,32 @@ const editTodo = (uid, name) => {
   }
 
   // create all the checkboxes when the edit btn is clicked
-  for (let i = 0; i < todoItems.length; i++) {
-    const todoItem = todoItems[i];
-    
+  const todosRef = ref(database, `users/${uid}/${name}/todos`);
+  onValue(todosRef, (snapshot) => {
+    const data = snapshot.val();
+    let todoItem = "";
+
+    for (let i = 0; i < todoItems.length; i++) {
+      // creates the todo item.
+      todoItem = todoItems[i];
+    }
+
+    /*
+      \\ Creates the checkboxes
     const checkboxes = document.createElement('input');
     checkboxes.type = 'checkbox';
     checkboxes.style.marginLeft = '5px';
     checkboxes.className = 'delete-item';
-    checkboxes.id = i;
+    checkboxes.id = num;
     todoItem.appendChild(checkboxes);
-  }
+    */
+
+    for (let num in data) {
+      // returns 0, 2, 3. need to set id of checkbox to these values;
+    }
+
+    
+  })
 
   // when the checkbox is clicked. delete that todoItem
   const checkboxes = document.querySelectorAll('.delete-item');
@@ -229,11 +257,20 @@ const editTodo = (uid, name) => {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', () => {
       const checkboxId = checkbox.id;
+      console.log(checkboxId);
       
       // delete the item in the database
-      set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
-      alert("Deleted that todo item");
-      window.location.reload();
+      //set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
+      const todosRef = ref(database, `users/${uid}/${name}/todos`);
+      onValue(todosRef, (snapshot) => {
+        const data = snapshot.val();
+
+        for (let num in data) {
+          console.log(num);
+        }
+      })
+      //alert("Deleted that todo item");
+      //window.location.reload();
     })
   })
 
@@ -280,8 +317,6 @@ const editTodo = (uid, name) => {
 
       onValue(todosRef, (snapshot) => {
         const data = snapshot.val();
-
-        console.log(data);
 
         for (let num in data) {
           indexNum = num;
