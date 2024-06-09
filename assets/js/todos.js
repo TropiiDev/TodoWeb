@@ -113,7 +113,7 @@ onAuthStateChanged(auth, (user) => {
 
             // if there are no todos in the todoObj, delete that todo list.
             if (todos === undefined) {
-              const noTodoItemObj = Object.entries(todoName)[i][i];
+              const noTodoItemObj = Object.entries(todoName)[i][0];
               const todosRef = ref(
                 database,
                 `/users/${user.uid}/${todoName[noTodoItemObj]}`,
