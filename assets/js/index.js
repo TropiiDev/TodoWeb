@@ -171,19 +171,12 @@ const edit = () => {
     const todoListItem = document.querySelectorAll('#todo-item');
     const lastTodoItem = todoListItem[todoListItem.length - 1];
 
-    // if there is no text then alert the user
-    if (newNameInput.value == "") {
-      alert("You need a name for this todo!");
-      return;
-    }
-
     // if there is not lastTodoItem then create a new entry
     if (lastTodoItem === undefined) {
       const todoNum = 0;
 
       const newTodoItem = document.createElement('li');
-      
-      newTodoItem.className = Number(todoNum) + 1;
+      newTodoItem.className = todoNum;
       newTodoItem.id = 'todo-item';
       newTodoItem.innerHTML = newNameInput.value;
 
