@@ -1,12 +1,10 @@
 import { app } from './components/firebase.js';
-import { getAuth, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const auth = getAuth();
 
 const hamburgerButton = document.querySelector('.menu-toggle');
-
-
 
 // check if the user is logged in. if so, edit the nav bar
 onAuthStateChanged(auth, (user) => {

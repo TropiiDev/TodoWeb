@@ -1,11 +1,13 @@
 import {
   getAuth,
   onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   onValue,
   ref,
   set,
+  update,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import { app, database } from "./components/firebase.js";
 
@@ -15,6 +17,31 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // signed in
+    const logoutBtns = document.querySelectorAll('.logout-button');
+    const accountBtns = document.querySelectorAll('.account-button');
+    const todoBtns = document.querySelectorAll('.todo-button');
+
+    logoutBtns.forEach((logoutBtn) => {
+      logoutBtn.addEventListener('click', () => {
+        signOut(auth).then(() => {
+          window.location.href = './signin.html';
+        }).catch((error) => {
+          console.error(error.message);
+        })
+      })
+    })
+
+    accountBtns.forEach((accountBtn) => {
+      accountBtn.addEventListener('click', () => {
+        window.location.href = './account.html';
+      })
+    })
+
+    todoBtns.forEach((todoBtn) => {
+      todoBtn.addEventListener('click', () => {
+        window.location.href = './todo.html';
+      })
+    })
 
     // load the existing todos
     const todosRef = ref(database, `users/${user.uid}`);
@@ -25,8 +52,8 @@ onAuthStateChanged(auth, (user) => {
         let todoName = [];
         // get all the names of the objects
         for (let key in data) {
-          if (key.indexOf(' ') > 0) {
-            const newTodoName = key.replace(/ /g, '-');
+          if (key.indexOf(" ") > 0) {
+            const newTodoName = key.replace(/ /g, "-");
             todoName.push(newTodoName);
           } else {
             todoName.push(key);
@@ -60,8 +87,8 @@ onAuthStateChanged(auth, (user) => {
             // set the name of the todos
             const todoH2 = document.createElement("h2");
             todoH2.className = `title ${todoName[i]}`;
-            if (todoName[i].indexOf('-') > 0) {
-              todoH2.innerHTML = todoName[i].replace(/-/g,' ');
+            if (todoName[i].indexOf("-") > 0) {
+              todoH2.innerHTML = todoName[i].replace(/-/g, " ");
             } else {
               todoH2.innerHTML = todoName[i];
             }
@@ -84,21 +111,51 @@ onAuthStateChanged(auth, (user) => {
             todoUl.id = "todo-list";
             todoContent.appendChild(todoUl);
 
+            // if there are no todos in the todoObj, delete that todo list.
+            if (todos === undefined) {
+              const noTodoItemObj = Object.entries(todoName)[i][i];
+              const todosRef = ref(
+                database,
+                `/users/${user.uid}/${todoName[noTodoItemObj]}`,
+              );
+
+              set(todosRef, null);
+            }
+
             // loop through all the todos then create the todo item
             for (let index = 0; index < Object.values(todos).length; index++) {
               const todoObject = Object.values(todos)[index];
+              /*
+                if we get undefined, that means theres a gap.
+                When a user creates a todo item. it saves in the db
+                as a number. Say the user has two todos. It'll show
+                up as 0 and 1. Say they create another one, now its
+                0, 1, and 2. If user deletes the todo at index 1.
+                It creates a gap and now the database has 0 and 2.
+                For some reason though, `todos` shows 0, 1, and 2.
+                So now when the page loads 1 will return undefined
+                and we just want to skip it and continue so it can
+                load the rest.
+              */
               if (todoObject === undefined) {
                 continue;
               } else {
-                // the item does exist
+                // that item exists
                 const todoItemName = todoObject.name;
-                const todoItemNum = []
+                const todoItemNum = [];
 
+                /*
+                  Get the numbers saved in the database.
+                  Usually it'll be 0, 1, and 2. (Example)
+                  If the user deletes the todo at index 1,
+                  this will return 0 and 2 so we can loop through that.
+                */
                 for (let num in todos) {
                   todoItemNum.push(num);
                 }
-                
-                const todoItem = document.createElement('li');
+
+                // create the todoItem
+                const todoItem = document.createElement("li");
                 todoItem.className = `${todoName[i]}-task`;
                 todoItem.id = todoItemNum[index];
                 todoItem.innerHTML = todoItemName;
@@ -107,14 +164,14 @@ onAuthStateChanged(auth, (user) => {
             }
 
             // create the todoActionsDiv
-            
+
             const todoActionsDiv = document.createElement("div");
-            todoActionsDiv.className = 'todo-actions';
+            todoActionsDiv.className = "todo-actions";
             todoActionsDiv.id = `${todoName[i]}-actions`;
             todoActionsDiv.style.margin = "0";
             todoActionsDiv.style.padding = "0";
             todoDiv.appendChild(todoActionsDiv);
-            
+
             // create the Edit button
             const todoEditBtn = document.createElement("button");
             todoEditBtn.className = "todo-action";
@@ -168,8 +225,9 @@ onAuthStateChanged(auth, (user) => {
         );
         const firstTask = document.querySelector("#firstTask");
 
-        if (newTodoName.value.indexOf(' ') > 0) {
-          const newName = newTodoName.value.replace(/ /g, '-');
+        // if there is spaces, replace it with a -
+        if (newTodoName.value.indexOf(" ") > 0) {
+          const newName = newTodoName.value.replace(/ /g, "-");
 
           set(ref(database, `users/${user.uid}/${newName}`), {
             description: newTodoDescription.value,
@@ -180,11 +238,12 @@ onAuthStateChanged(auth, (user) => {
             },
           });
 
-          window.location.reload()
+          window.location.reload();
 
           return;
         }
-        
+
+        // if not just create one normally
         set(ref(database, `users/${user.uid}/${newTodoName.value}`), {
           description: newTodoDescription.value,
           todos: {
@@ -220,40 +279,45 @@ const editTodo = (uid, name) => {
     }
   }
 
+  // create the checkboxes to delete the todo
   const getTodosRef = ref(database, `users/${uid}/${name}/todos`);
 
   onValue(getTodosRef, (snapshot) => {
     const data = snapshot.val();
     let entries = [];
 
+    // loop through the entries in data
     for (let i = 0; i < Object.entries(data).length; i++) {
+      // push any of the numbers to the entries
       const nums = Object.entries(data)[i][0];
       entries.push(nums);
     }
 
+    // loop through the items in entries
     for (let i = 0; i < entries.length; i++) {
-      const todoItem = todoItems[i];
-      
-      const checkboxes = document.createElement('input');
-      checkboxes.type = 'checkbox';
-      checkboxes.style.marginLeft = '5px';
-      checkboxes.className = 'delete-item';
+      // create the checkboxes
+      const todoItem = todoItems[i];  
+
+      const checkboxes = document.createElement("input");
+      checkboxes.type = "checkbox";
+      checkboxes.style.marginLeft = "5px";
+      checkboxes.className = "delete-item";
       checkboxes.id = entries[i];
       todoItem.appendChild(checkboxes);
     }
-  })
+  });
 
   // when the checkbox is clicked. delete that todoItem
-  const checkboxes = document.querySelectorAll('.delete-item');
+  const checkboxes = document.querySelectorAll(".delete-item");
 
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('click', () => {
+    checkbox.addEventListener("click", () => {
       const checkboxId = checkbox.id;
-      
+
       set(ref(database, `users/${uid}/${name}/todos/${checkboxId}`), null);
       window.location.reload();
-    })
-  })
+    });
+  });
 
   // create the add and save buttons
   const addBtn = document.createElement("button");
@@ -304,6 +368,15 @@ const editTodo = (uid, name) => {
         }
       });
       // create the new task
+      for (let i = 0; i < todoItems.length; i++) {
+        const checkbox = todoItems[i].lastChild;
+        todoItems[i].removeChild(checkbox);
+        if (addTodoName.value === todoItems[i].innerHTML) {
+          alert("You already have a todo with that name");
+          window.location.reload();
+          return;
+        }
+      }
       set(
         ref(database, `/users/${uid}/${name}/todos/${Number(indexNum) + 1}`),
         {
@@ -311,6 +384,54 @@ const editTodo = (uid, name) => {
         },
       );
       window.location.reload();
+    });
+  });
+
+  // check if the todo item title was clicked, if so rename it.
+  todoItems.forEach((todoItem) => {
+    todoItem.addEventListener("click", (e) => {
+      const todoItemId = todoItem.id;
+      const todoEditModal = document.querySelector("#editModal");
+      const changeName = document.querySelector("#changeName");
+
+      // if the checkbox was clicked don't to anything
+      if (e.target.nodeName === "INPUT") {
+        return;
+      }
+
+      todoEditModal.style.display = "flex";
+
+      changeName.addEventListener("click", () => {
+        const nameChangeInput = document.querySelector("#nameChange").value;
+        const todoItems = document.querySelectorAll(`.${name}-task`);
+        const currentTodosRef = ref(database, `users/${uid}/${name}/todos/${todoItemId}`);
+
+        for (let i = 0; i < todoItems.length; i++) {
+          // remove the checkbox from the todoItem
+          const checkbox = todoItems[i].lastChild;
+          todoItems[i].removeChild(checkbox);
+
+          // if a todo already exists with that name. Don't change the name
+          if (nameChangeInput === todoItems[i].innerHTML) {
+            alert("You already have a todo with that name");
+            window.location.reload();
+            return;
+          } else {
+            // it doesn't, change the name
+            onValue(currentTodosRef, () => {
+              const newData = {
+                name: nameChangeInput,
+              };
+    
+              const updates = {};
+              updates[`users/${uid}/${name}/todos/${todoItemId}`] = newData;
+    
+              update(ref(database), updates);
+              window.location.reload();
+            });
+          }
+        }
+      });
     });
   });
 };
